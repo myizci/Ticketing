@@ -7,8 +7,8 @@ import lombok.NoArgsConstructor;
 import java.time.LocalDateTime;
 
 @NoArgsConstructor
-@AllArgsConstructor
 @Data
+@AllArgsConstructor
 public class BaseEntity {
     private Long id;
     private LocalDateTime insertDateTime;
