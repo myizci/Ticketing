@@ -32,7 +32,7 @@
                                 <div class="panel-body">
 
                                     <!-- ------------------------FORM START----------------------------- -->
-                                    <form action="#" th:object="${user}">
+                                    <form action="#" th:object="${user}"> <!-- user is a dto object -->
                                         <div class="row">
                                             <div class="col-sm-6 col-md-6">
                                                 <div class="form-group">
@@ -81,30 +81,30 @@
                                             </div>
                                         </div>
 
-                                        <div class="row">
-                                            <div class="col-sm-6 col-md-6">
-                                                <div class="form-group">
-                                                    <label>Gender</label><br>
-                                                    <label class="custom-control custom-radio custom-control-inline">
-                                                        <input type="radio" name="radio-inline" th:field="*{gender}" th:value="Male" class="custom-control-input"><span class="custom-control-label">Male</span>
-                                                    </label>
-                                                    <label class="custom-control custom-radio custom-control-inline">
-                                                        <input type="radio" name="radio-inline" th:field="*{gender}" th:value="Female class="custom-control-input"><span class="custom-control-label">Female</span>
-                                                    </label>
+                                                                                <div class="row">
+                                                                                    <div class="col-sm-6 col-md-6">
+                                                                                        <div class="form-group">
+                                                                                            <label>Gender</label><br>
+                                                                                            <label class="custom-control custom-radio custom-control-inline">
+                                                                                                <input type="radio" name="radio-inline" th:field="*{gender}" th:value="Male" class="custom-control-input"><span class="custom-control-label">Male</span>
+                                                                                            </label>
+                                                                                            <label class="custom-control custom-radio custom-control-inline">
+                                                                                                <input type="radio" name="radio-inline" th:field="*{gender}" th:value="Female" class= "custom-control-input"><span class="custom-control-label">Female</span>
+                                                                                            </label>
 
-                                                </div>
-                                            </div>
+                                                                                        </div>
+                                                                                    </div>
 
-                                            <div class="col-sm-6 col-md-6">
-                                                <div class="form-group">
-                                                    <label>Choose a Role</label>
-                                                    <select name="role" th:field="*{role}" class="custom-select">
-                                                        <option th:value="''" th:text="Select"></option>
-                                                        <option th:each="role : ${}"></option>
-                                                    </select>
-                                                </div>
-                                            </div>
-                                        </div>
+                                                                                    <div class="col-sm-6 col-md-6">
+                                                                                        <div class="form-group">
+                                                                                            <label>Choose a Role</label>
+                                                                                            <select name="role" th:field="*{role}" class="custom-select">
+                                                                                                <option th:value="''" th:text="Select"></option>
+                                                                                                <option th:each="role :${roles}"></option>
+                                                                                            </select>
+                                                                                        </div>
+                                                                                    </div>
+                                                                                </div>
 
                                         <div class="row">
                                             <div class="col-sm-6 col-md-6 col-lg-12">
