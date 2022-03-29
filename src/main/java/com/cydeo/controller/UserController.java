@@ -3,9 +3,12 @@ package com.cydeo.controller;
 import com.cydeo.dto.UserDTO;
 import com.cydeo.service.RoleService;
 import com.cydeo.service.UserService;
+import com.cydeo.service.impl.RoleServiceImpl;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
@@ -21,12 +24,23 @@ public class UserController {
     }
 
     @GetMapping("/create")
-    public String createUser(Model model){
+    public String createUser(Model model) {
 
 
-        model.addAttribute("user",new UserDTO());
-        model.addAttribute("roles", roleService.findAll());
+        model.addAttribute("user", new UserDTO());
+        model.addAttribute("roles", roleService.findAll()); // all the roles, List
+        model.addAttribute("users", userService.findAll());
         return "user/create";
     }
+
+    @PostMapping("/create")
+    public String insertUser(@ModelAttribute("user") UserDTO user, Model model) {
+
+        userService.save(user);
+
+       // return "/user/create";
+        return "redirect:/user/create";
+    }
+
 
 }

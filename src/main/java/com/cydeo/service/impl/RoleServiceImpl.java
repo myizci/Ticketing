@@ -9,6 +9,8 @@ import java.util.List;
 @Service
 public class RoleServiceImpl extends AbstractMapService<RoleDTO,Long> implements RoleService {
 
+
+
     @Override
     public RoleDTO save(RoleDTO object) {
         return super.save(object.getId(), object);
@@ -30,5 +32,10 @@ public class RoleServiceImpl extends AbstractMapService<RoleDTO,Long> implements
         return super.findBy(id);
     }
 
+ public void print(){
+     for (Long key : super.map.keySet()) {
+         System.out.println(super.map.get(key).getDescription());
+     }
+ }
 
 }
