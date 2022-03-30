@@ -8,6 +8,11 @@ import java.util.List;
 
 @Service
 public class UserServiceImpl extends AbstractMapService<UserDTO,String> implements UserService {
+    @Override
+    public void update(UserDTO object) {
+
+        super.update(object.getUserName(),object);
+    }
 
     @Override
     public UserDTO save(UserDTO object) {
