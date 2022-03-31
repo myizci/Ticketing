@@ -163,6 +163,12 @@
                                                     <a th:href="@{/user/update/{id}(id=${user.userName})}"><button type="button" class="btn btn-warning btn-sm">Update</button></a>
                                                     <a th:href="@{/user/delete/{id}(id=${user.userName})}" class="delete-row"><button type="button" class="btn btn-secondary btn-sm">Delete</button></a>
                                                 </td>
+
+                                                // we have users
+                                                // for each line we have a user object  tr th:each="user : ${users}"
+                                                // id=username = user.username
+                                                // go to update/id
+
                                             </tr>
 
                                             </tbody>
