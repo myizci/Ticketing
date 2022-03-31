@@ -34,7 +34,7 @@ public class ProjectController {
     }
 
     @PostMapping("/create")
-    public String insertProject(@ModelAttribute("project") ProjectDTO project){
+    public String insertProject( ProjectDTO project){
 
         projectService.save(project);
 
