@@ -16,4 +16,13 @@ public class TaskController {
 
         return "task/create";
     }
+
+    @GetMapping("/status-update")
+    public String updateStatus(Model model){
+
+
+        return "task/status-update";
+    }
+
+
 }

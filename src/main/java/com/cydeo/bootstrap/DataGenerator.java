@@ -2,11 +2,13 @@ package com.cydeo.bootstrap;
 
 import com.cydeo.dto.ProjectDTO;
 import com.cydeo.dto.RoleDTO;
+import com.cydeo.dto.TaskDTO;
 import com.cydeo.dto.UserDTO;
 import com.cydeo.enums.Gender;
 import com.cydeo.enums.Status;
 import com.cydeo.service.ProjectService;
 import com.cydeo.service.RoleService;
+import com.cydeo.service.TaskService;
 import com.cydeo.service.UserService;
 import com.cydeo.service.impl.RoleServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,11 +24,13 @@ public class DataGenerator implements CommandLineRunner { // this class will run
     RoleService roleService;
     UserService userService;
     ProjectService projectService;
+    TaskService taskService;
 
-    public DataGenerator(RoleService roleService, UserService userService, ProjectService projectService) {
+    public DataGenerator(RoleService roleService, UserService userService, ProjectService projectService, TaskService taskService) {
         this.roleService = roleService;
         this.userService = userService;
         this.projectService = projectService;
+        this.taskService = taskService;
     }
 
     @Override
@@ -77,6 +81,15 @@ public class DataGenerator implements CommandLineRunner { // this class will run
         projectService.save(project2);
         projectService.save(project3);
 
+
+        TaskDTO task1 = new TaskDTO(1L,project1,user8,"Controller","Request Mapping",LocalDate.now().minusDays(4),Status.IN_PROGRESS);
+        TaskDTO task2 = new TaskDTO(2L,project3,user3,"Configuration","Database Connnection",LocalDate.now().minusDays(12),Status.COMPLETE);
+        TaskDTO task3 = new TaskDTO(3L,project3,user6,"Mapping","One-To-Many",LocalDate.now().minusDays(8),Status.IN_PROGRESS);
+        TaskDTO task4 = new TaskDTO(4L,project2,user7,"Dependency Injection","Autowired",LocalDate.now().minusDays(20),Status.IN_PROGRESS);
+        taskService.save(task1);
+        taskService.save(task2);
+        taskService.save(task3);
+        taskService.save(task4);
 
     }
 }
