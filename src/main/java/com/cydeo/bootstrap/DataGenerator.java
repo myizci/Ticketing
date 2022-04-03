@@ -82,10 +82,10 @@ public class DataGenerator implements CommandLineRunner { // this class will run
         projectService.save(project3);
 
 
-        TaskDTO task1 = new TaskDTO(1L,project1,user8,"Controller","Request Mapping",LocalDate.now().minusDays(4),Status.IN_PROGRESS);
-        TaskDTO task2 = new TaskDTO(2L,project3,user3,"Configuration","Database Connnection",LocalDate.now().minusDays(12),Status.COMPLETE);
-        TaskDTO task3 = new TaskDTO(3L,project3,user6,"Mapping","One-To-Many",LocalDate.now().minusDays(8),Status.IN_PROGRESS);
-        TaskDTO task4 = new TaskDTO(4L,project2,user7,"Dependency Injection","Autowired",LocalDate.now().minusDays(20),Status.IN_PROGRESS);
+        TaskDTO task1 = new TaskDTO(project1,user8,"Controller","Request Mapping",LocalDate.now().minusDays(4),Status.IN_PROGRESS);
+        TaskDTO task2 = new TaskDTO(project3,user3,"Configuration","Database Connnection",LocalDate.now().minusDays(12),Status.COMPLETE);
+        TaskDTO task3 = new TaskDTO(project3,user6,"Mapping","One-To-Many",LocalDate.now().minusDays(8),Status.IN_PROGRESS);
+        TaskDTO task4 = new TaskDTO(project2,user7,"Dependency Injection","Autowired",LocalDate.now().minusDays(20),Status.IN_PROGRESS);
         taskService.save(task1);
         taskService.save(task2);
         taskService.save(task3);
