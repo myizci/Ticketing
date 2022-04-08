@@ -1,0 +1,117 @@
+SELECT * FROM employees;
+
+select * from departments;
+
+select * from regions;
+
+select employee_id, first_name, department from employees;
+
+select * from employees where department='Sports';
+
+select * from employees where department like '%nit%';
+
+select * from employees where department like 'G____';
+
+select * from employees where department like 'G%';
+
+select * from employees where salary>100000;
+
+-- employees in clothing dep and/or making > 90K
+select first_name, last_name, department, salary from employees where department='Clothing' or salary>90000 order by  salary asc ;
+
+select first_name, last_name, department, salary from employees where salary<40000 and department in('Clothing','Pharmacy');
+select first_name, last_name, department, salary from employees where employees.department <> 'Sports';
+
+select first_name, email from employees where email is not null;
+
+select * from employees where salary between 80000 and 100000;
+
+select first_name, email from employees where gender='F' and department='Tools' and salary>110000;
+
+select * from employees order by employee_id desc;
+select * from employees order by first_name desc;
+select * from employees order by first_name desc limit 5;
+select * from employees order by first_name fetch first 5 rows only ;
+
+select distinct department from employees;
+
+select salary as annual_salary from employees;
+
+select student_name, age from students order by age desc limit 4;
+
+-- String manipulation
+
+select upper(first_name), upper(last_name)
+from  employees;
+
+select length(first_name) , first_name from employees;
+
+select trim('    Hello there    ');
+select length('    Hello there    '); --19
+select length(trim('    Hello there    ')); --11
+
+-- create full name column and display
+
+select first_name||' '||last_name as full_name from employees;
+
+-- boolean values
+
+select salary, (salary>140000) as Greaterthan140K from employees;
+select first_name,salary, (salary>140000) as Greaterthan140K from employees order by salary desc ;
+
+--SubString(string, start_position, length)
+
+select substring('this is test data',1,10) as test_data;
+select substring('this is test data' from 1 for 4) as test_data;
+
+-- display one initials column which first and last name
+
+select substring(first_name,1,1)||'.'||substring(last_name from 1 for 1) as initials from employees;
+
+select  department, replace(department,'Clothing','Clothes') from departments;
+
+select avg(salary) from employees;
+select max(salary) from employees;
+select first_name from employees where salary=(select min(salary) from employees);
+
+select round(avg(salary),2) from employees;
+
+select count(*) from employees;
+select count(email) from employees;
+
+select sum(salary) from employees;
+select sum(salary) from employees where department='Clothing';
+select sum(salary) from employees where department='Tools';
+
+-- show me all unique email domains
+
+select distinct substring(email like '%') from employees;
+select distinct department from employees;
+select count(*) from employees where department='Pharmacy';
+select count(*) from employees where department='Clothing';
+select department, count(*) from employees group by department;
+select department, max(salary),min(salary),sum(salary),round(avg(salary),2) from employees group by department;
+
+select count(*) ,department  from employees group by department having count(*) >40 order by count(*);
+select count(*) ,department  from employees where department <> 'Garden' group by department having count(*) >40 order by count(*);
+
+-- show the duplicate email domains and how many times they repeat
+
+select distinct substring(email,position('@'in email),length(email)) from employees ;
+
+select count(*), substring(email,position('@' in email)+1) as email_domain
+from employees
+where email is not null
+group by email_domain
+having count(*)>1
+order by  count(*) desc;
+-- how to find duplicate names
+select  count(*), first_name from employees  group by first_name having count(*)>1;
+
+select first_name, salary ,
+case
+    when salary<80000 then 'Under Paid'
+    when salary>80000 then 'Unpaid'
+    else 'Unpaid'
+    end as category
+from employees;

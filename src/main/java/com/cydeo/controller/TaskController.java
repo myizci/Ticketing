@@ -16,9 +16,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @RequestMapping("/task")
 public class TaskController {
 
-    TaskService taskService;
-    ProjectService projectService;
-    UserService userService;
+   private final TaskService taskService;
+    private final ProjectService projectService;
+    private final  UserService userService;
 
     public TaskController(TaskService taskService, ProjectService projectService, UserService userService) {
         this.taskService = taskService;
@@ -51,6 +51,9 @@ public class TaskController {
         return "task/status-update";
     }
 
+
+
+
     @GetMapping("/delete/{id}")
     public String deleteTask(@PathVariable("id") Long id){
 
@@ -60,5 +63,22 @@ public class TaskController {
 
     }
 
+    @GetMapping("/update/{taskId}")
+    public String editProject(@PathVariable("taskId") Long taskId, Model model){
+        model.addAttribute("task", taskService.findById(taskId));
+        model.addAttribute("projects",projectService.findAll());
+        model.addAttribute("employees",userService.findEmployees());
+        model.addAttribute("tasks",taskService.findAll());
+
+        return "/task/update";
+    }
+
+    @PostMapping("/update/{taskId}")
+
+    public String updateTask(@PathVariable("taskId") Long taskId, TaskDTO task){
+        task.setId(taskId);
+        taskService.update(task);
+        return "redirect:/task/create";
+    }
 
 }
