@@ -30,13 +30,17 @@
                                 </header>
                                 <div class="panel-body">
                                     <!-- ------------------------FORM START----------------------------- -->
-                                    <form>
+                                    <form th:action="@{/task/employee/update/{id}(id=${task.id})}" method="post"
+                                    th:object="${task}";>
                                         <div class="row">
                                             <div class="col-sm-6 col-md-6 col-xs-12">
                                                 <div class="form-group">
                                                     <label>Project</label>
-                                                    <select name="project" class="custom-select" disabled>
-                                                        <option></option>
+                                                    <select th:field="*{project}" name="project" class="custom-select" disabled>
+                                                        <option th:each="project : ${projects}"
+                                                                th:value="${project.projectCode}"
+                                                                th:text="${project.projectName}">
+                                                        </option>
                                                     </select>
                                                 </div>
                                             </div>
@@ -45,8 +49,11 @@
                                             <div class="col-sm-6 col-md-6 col-xs-12">
                                                 <div class="form-group">
                                                     <label>Assigned Employee</label>
-                                                    <select name="assignedemployee" class="custom-select" disabled>
-                                                        <option></option>
+                                                    <select th:field="*{assignedEmployee}" name="assignedEmployee" class="custom-select" disabled>
+                                                        <option th:each="employee : ${employees}"
+                                                                th:value="${employee.userName}"
+                                                                th:text="${employee.firstName +' '+employee.lastName}">
+                                                        </option>
                                                     </select>
                                                 </div>
                                             </div>
@@ -57,7 +64,7 @@
                                                     <div class="col-sm-12 col-md-12 col-xs-12">
                                                         <div class="form-group">
                                                             <label for="tasksubject">Task Subject</label>
-                                                            <input id="tasksubject" type="text" class="form-control"
+                                                            <input th:field="*{taskSubject}" id="tasksubject" type="text" class="form-control"
                                                                    aria-describedby="inputGroupPrepend" disabled/>
                                                         </div>
                                                     </div>
@@ -70,7 +77,7 @@
                                                     <div class="col-sm-12 col-md-12 col-xs-12">
                                                         <div class="form-group">
                                                             <label>Task Detail</label>
-                                                            <textarea id="taskdetail" class="form-control" rows="3"
+                                                            <textarea th:text="${task.taskDetail}" id="taskdetail" class="form-control" rows="3"
                                                                       aria-describedby="inputGroupPrepend"
                                                                       disabled></textarea>
                                                         </div>
@@ -82,8 +89,10 @@
                                             <div class="col-sm-6 col-md-6 col-xs-12">
                                                 <div class="form-group">
                                                     <label>Status</label>
-                                                    <select name="taskStatus" class="custom-select">
-                                                        <option></option>
+                                                    <select th:field="*{taskStatus}" name="taskStatus"
+                                                            class="custom-select">
+                                                        <option th:each="status : ${statuses}" th:value="${status}"
+                                                                th:text="${status.value}"></option>
                                                     </select>
                                                 </div>
                                             </div>
@@ -125,7 +134,7 @@
                                             </tr>
                                             </thead>
                                             <tbody>
-                                            <tr >
+                                            <tr th:each="">
                                                 <td></td>
                                                 <td></td>
                                                 <td></td>

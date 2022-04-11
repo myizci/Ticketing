@@ -88,4 +88,9 @@ ProjectDTO newProject= findById(object.getProjectCode());
         return projectList;
 
     }
+
+    @Override
+    public List<ProjectDTO> findAllNonCompletedProjects() {
+      return   findAll().stream().filter(project->!(project.getProjectStatus().equals(Status.COMPLETE))).collect(Collectors.toList());
+    }
 }

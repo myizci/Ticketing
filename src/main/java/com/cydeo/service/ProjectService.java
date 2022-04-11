@@ -10,4 +10,6 @@ public interface ProjectService extends CrudService<ProjectDTO,String> {
     void complete(ProjectDTO projectDTO);
 
     List<ProjectDTO> getCountedListOfProjectDTO(UserDTO manager);
+
+    List<ProjectDTO> findAllNonCompletedProjects();
 }
