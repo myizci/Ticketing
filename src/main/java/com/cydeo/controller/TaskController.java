@@ -89,6 +89,29 @@ public class TaskController {
         return "task/pending-tasks";
     }
 
+    @GetMapping("/employee/edit/{id}")
+    public String employeeEditTask(@PathVariable("id") Long id, Model model) {
+
+        model.addAttribute("task", taskService.findById(id));
+        model.addAttribute("employees", userService.findEmployees());
+        model.addAttribute("projects", projectService.findAllNonCompletedProjects());
+        model.addAttribute("tasks", taskService.findAllTasksByStatusIsNot(Status.COMPLETE));
+        model.addAttribute("statuses", Status.values());
+
+        return "task/status-update";
+
+    }
+
+
+
+    @PostMapping("/employee/update/{id}")
+    public String employeeUpdateTasks(TaskDTO taskDTO){
+
+        taskService.updateStatus(taskDTO);
+
+        return "redirect:task/employee/pending-tasks";
+    }
+
 
 
 }
